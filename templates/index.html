@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Test</title>
+    <meta charset="UTF-8">
+    <script>
+        async function TestForm(event) {
+            event.preventDefault(); // Zapobiega przeładowaniu strony
+            
+            const text = document.querySelector('[name="text"]').value; // Pobranie wartości
+
+            // Wysłanie żądania POST do serwera
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: text
+            });
+
+            if (!response.ok) {
+                alert('Błąd podczas przesyłania danych.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <section>
+        <article>
+            <form id="TestForm" onsubmit="TestForm(event)">
+                <label>Text: <input type="text" name="text" required></label><br>
+                <button type="submit">Wyślij</button>
+            </form>
+        </article>
+    </section>
+</body>
+</html>
